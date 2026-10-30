@@ -348,6 +348,8 @@ public class AppAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private Drawable loadBanner(PackageManager pm, ResolveInfo ri) {
+        // The Settings tile opens the launcher's own Settings app, so it wears that app's banner.
+        if ("com.android.tv.settings".equals(ri.activityInfo.packageName)) return ctx.getDrawable(R.drawable.banner_settings);
         int id = ri.activityInfo.banner;
         if (id == 0) id = ri.activityInfo.applicationInfo.banner;
         Drawable banner = null;
